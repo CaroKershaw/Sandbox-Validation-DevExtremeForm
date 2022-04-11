@@ -71,6 +71,38 @@
         >
         </dxi-validation-rule>
       </dxi-item>
+
+      <dxi-item
+        dataField="Mac"
+        [editorOptions]="{
+          invalidDateMessage:
+            'The mac must have the following format: XX-XX-XX-XX-XX-XX'
+        }"
+      >
+        <dxo-label text="Mac"> </dxo-label>
+        <dxi-validation-rule
+          type="pattern"
+          [pattern]="macRegex"
+          message="The mac must have the following format: XX-XX-XX-XX-XX-XX"
+        >
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item
+        dataField="IPAddress"
+        [editorOptions]="{
+          invalidDateMessage:
+            'The IP address must have the following format: XXX.XXX.XXX.XXX'
+        }"
+      >
+        <dxo-label text="IP Address"> </dxo-label>
+        <dxi-validation-rule
+          type="pattern"
+          [pattern]="ipRegex"
+          message="The IP address must have the following format: XXX.XXX.XXX.XXX"
+        >
+        </dxi-validation-rule>
+      </dxi-item>
     </dxi-item>
     <dxi-item itemType="group" caption="Billing address">
       <dxi-item

@@ -1,8 +1,6 @@
-import {
-  NgModule, Component, ViewChild, enableProdMode,
-} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { NgModule, Component, ViewChild, enableProdMode } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import {
   DxCheckBoxModule,
   DxSelectBoxModule,
@@ -10,15 +8,14 @@ import {
   DxButtonModule,
   DxFormModule,
   DxAutocompleteModule,
-  DxFormComponent,
-} from 'devextreme-angular';
-import notify from 'devextreme/ui/notify';
+  DxFormComponent
+} from "devextreme-angular";
+import notify from "devextreme/ui/notify";
 
-import { Customer, Service } from './app.service';
-
+import { Customer, Service } from "./app.service";
 
 const sendRequest = function (value) {
-  const validEmail = 'test@dx-email.com';
+  const validEmail = "test@dx-email.com";
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(value === validEmail);
@@ -27,22 +24,26 @@ const sendRequest = function (value) {
 };
 
 @Component({
-  selector: 'demo-app',
+  selector: "demo-app",
   providers: [Service],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  @ViewChild(DxFormComponent, { static: false }) form:DxFormComponent;
+  @ViewChild(DxFormComponent, { static: false }) form: DxFormComponent;
 
-  password = '';
+  password = "";
 
   passwordOptions: any = {
-    mode: 'password',
-    value: this.password,
+    mode: "password",
+    value: this.password
   };
 
   customer: Customer;
+
+  ipRegex = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$/;
+
+  macRegex = /^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$/;
 
   countries: string[];
 
@@ -50,30 +51,32 @@ export class AppComponent {
 
   maxDate: Date = new Date();
 
-  cityPattern = '^[^0-9]+$';
+  cityPattern = "^[^0-9]+$";
 
   namePattern: any = /^[^0-9]+$/;
 
   phonePattern: any = /^[02-9]\d{9}$/;
 
   phoneRules: any = {
-    X: /[02-9]/,
+    X: /[02-9]/
   };
 
   buttonOptions: any = {
-    text: 'Register',
-    type: 'success',
-    useSubmitBehavior: true,
+    text: "Register",
+    type: "success",
+    useSubmitBehavior: true
   };
 
-  passwordComparison = () => this.form.instance.option('formData').Password;
+  passwordComparison = () => this.form.instance.option("formData").Password;
 
   checkComparison() {
     return true;
   }
 
   constructor(service: Service) {
-    this.maxDate = new Date(this.maxDate.setFullYear(this.maxDate.getFullYear() - 21));
+    this.maxDate = new Date(
+      this.maxDate.setFullYear(this.maxDate.getFullYear() - 21)
+    );
     this.countries = service.getCountries();
     this.cities = service.getCities();
     this.customer = service.getCustomer();
@@ -84,13 +87,17 @@ export class AppComponent {
   }
 
   onFormSubmit = function (e) {
-    notify({
-      message: 'You have submitted the form',
-      position: {
-        my: 'center top',
-        at: 'center top',
+    notify(
+      {
+        message: "You have submitted the form",
+        position: {
+          my: "center top",
+          at: "center top"
+        }
       },
-    }, 'success', 3000);
+      "success",
+      3000
+    );
 
     e.preventDefault();
   };
@@ -104,11 +111,11 @@ export class AppComponent {
     DxNumberBoxModule,
     DxButtonModule,
     DxAutocompleteModule,
-    DxFormModule,
+    DxFormModule
   ],
   declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
 
 platformBrowserDynamic().bootstrapModule(AppModule);
